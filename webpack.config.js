@@ -8,10 +8,12 @@ module.exports = {
   experiments: {
     asyncWebAssembly: true,
   },
-  entry: "./js/index.js",
+  entry: {
+    index: "./js/index.js"
+  },
   output: {
     path: dist,
-    filename: "bundle.js"
+    filename: "[name].js"
   },
   devServer: {
     contentBase: dist,
@@ -22,7 +24,7 @@ module.exports = {
     }),
 
     new WasmPackPlugin({
-      crateDirectory: path.resolve(__dirname, "src"),
+      crateDirectory: __dirname,
       // WasmPackPlugin defaults to compiling in "dev" profile. To change that, use forceMode: 'release':
       // forceMode: 'release'
     }),
