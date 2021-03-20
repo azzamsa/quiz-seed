@@ -1,31 +1,29 @@
-[env]
-PORT = "8000"
-
 [config]
 skip_core_tasks = true
 
 # ---- BASIC ----
 
-[tasks.watch]
-description = "Watch files and recompile the project on change"
-run_task = [
-    { name = "build" },
-]
-watch = true
-
 [tasks.serve]
 description = "Start server"
-install_crate = { crate_name = "microserver", binary = "microserver", test_arg = "-h" }
-command = "microserver"
-args = ["--port", "${PORT}"]
+install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
+command = "trunk"
+args = ["serve", "--open"]
+dependencies = ["prepare"]
 
 # ---- BUILD ----
 
 [tasks.build]
-description = "Build with wasm-pack"
-install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
-command = "wasm-pack"
-args = ["build", "--target", "web", "--out-name", "package", "--dev"]
+description = "Build with trunk"
+install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
+command = "trunk"
+args = ["build"]
+dependencies = ["prepare"]
+
+[tasks.prepare]
+description = "Prepare asset"
+install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
+command = "npx"
+args = ["postcss", "--config", "postcss.config.js", "css/styles.css", "--output", "css/compiled.css"]
 
 # ---- LINT ----
 

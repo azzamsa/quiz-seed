@@ -17,11 +17,24 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies
+      - name: Install Js dependencies
         run: yarn
 
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          target: wasm32-unknown-unknown
+
+      - name: Install Rust dependencies
+        run: cargo install wasm-bindgen-cli --version 0.2.72
+
+      - name: Install cargo-make
+        uses: davidB/rust-cargo-make@v1
+
       - name: build app
-        run: yarn run build
+        run: cargo make build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

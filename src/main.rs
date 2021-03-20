@@ -98,7 +98,6 @@ fn view(model: &Model) -> impl IntoNodes<Msg> {
 //     Start
 // ------ ------
 
-#[wasm_bindgen(start)]
-pub fn start() {
+pub fn main() {
     App::start("app", init, update, view);
 }
