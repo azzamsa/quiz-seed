@@ -1,6 +1,7 @@
-use seed::{prelude::*, *};
-
+//mod generated;
 mod page;
+
+use seed::{prelude::*, *};
 
 const POINT: &str = "point";
 const QUIZ: &str = "quiz";
@@ -74,6 +75,7 @@ fn view(model: &Model) -> impl IntoNodes<Msg> {
     vec![match &model.page {
         Page::Home => div![
             div![
+                C!["text-green-500"],
                 p!["Azra Quiz"],
                 p!["Test your general knowledge with 10 questions"]
             ],

@@ -1,2 +1,4 @@
-/target
-/pkg
+target/
+pkg/
+node_modules/
+dist/
