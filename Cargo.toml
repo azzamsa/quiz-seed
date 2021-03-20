@@ -1,7 +1,7 @@
 [package]
 version = "0.1.0"
 name = "quiz-seed"
-repository = "https://git.sr.ht/~azzamsa/quiz-seed"
+repository = "https://github.com/azzamsa/quiz-seed"
 authors = ["azzamsa <me@azzamsa.com>"]
 description = "Simple quiz app 🎲. Built with Seed."
 categories = ["quiz", "boilerplate"]
