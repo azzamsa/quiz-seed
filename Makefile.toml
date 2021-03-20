@@ -40,3 +40,22 @@ description = "Format with rustfmt"
 install_crate = { rustup_component_name = "rustfmt", binary = "rustfmt", test_arg = "-V" }
 command = "cargo"
 args = ["fmt"]
+
+[tasks.fmt_check]
+extend = "fmt"
+description = "Check format with nightly rustfmt"
+args = ["fmt", "--all", "--", "--check"]
+
+
+# ---- TEST ----
+
+[tasks.test_h]
+description = "Run headless tests. Ex: 'cargo make test_h firefox'. Test envs: [chrome, firefox, safari]"
+extend = "test"
+args = ["test", "--headless", "--${@}"]
+
+[tasks.test]
+description = "Run tests. Ex: 'cargo make test firefox'. Test envs: [chrome, firefox, safari]"
+install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
+command = "wasm-pack"
+args = ["test", "--${@}"]
