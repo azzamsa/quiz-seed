@@ -3,6 +3,13 @@ skip_core_tasks = true
 
 # ---- BASIC ----
 
+[tasks.clean]
+description = "Remove build output"
+script = [
+    "rm -rf dist",
+    "rm -f src/generated/css_classes.rs"
+]
+
 [tasks.serve]
 description = "Start server"
 install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
@@ -17,13 +24,18 @@ description = "Build with trunk"
 install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
 command = "trunk"
 args = ["build"]
-dependencies = ["prepare"]
+dependencies = ["prepare_release"]
 
 [tasks.prepare]
 description = "Prepare asset"
 install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
 command = "npx"
 args = ["postcss", "--config", "postcss.config.js", "css/styles.scss", "--output", "css/compiled.scss"]
+
+[tasks.prepare_release]
+description = "Prepare asset for release"
+command = "npx"
+args = ["postcss", "--config", "postcss.config.js", "css/styles.scss", "--output", "css/compiled.scss", "--env", "production"]
 
 # ---- LINT ----
 
