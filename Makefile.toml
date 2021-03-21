@@ -23,7 +23,7 @@ dependencies = ["prepare"]
 description = "Prepare asset"
 install_crate = { crate_name = "trunk", binary = "trunk", test_arg = "-V" }
 command = "npx"
-args = ["postcss", "--config", "postcss.config.js", "css/styles.css", "--output", "css/compiled.css"]
+args = ["postcss", "--config", "postcss.config.js", "css/styles.scss", "--output", "css/compiled.scss"]
 
 # ---- LINT ----
 
