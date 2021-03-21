@@ -34,10 +34,10 @@ command = "cargo"
 args = ["clippy", "--all-features", "--", "--deny", "warnings", "--deny", "clippy::pedantic", "--deny", "clippy::nursery"]
 
 [tasks.fmt]
-description = "Format with rustfmt"
-install_crate = { rustup_component_name = "rustfmt", binary = "rustfmt", test_arg = "-V" }
+description = "Format with nightly rustfmt"
+toolchain = "nightly"
 command = "cargo"
-args = ["fmt"]
+args = ["fmt", "--all"]
 
 [tasks.fmt_check]
 extend = "fmt"
@@ -57,3 +57,4 @@ description = "Run tests. Ex: 'cargo make test firefox'. Test envs: [chrome, fir
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
 command = "wasm-pack"
 args = ["test", "--${@}"]
+dependencies = ["prepare"]
