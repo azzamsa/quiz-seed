@@ -36,8 +36,15 @@ jobs:
       - name: build app
         run: cargo make build
 
+      - name: Install Netlify CLI
+        if: github.ref == 'refs/heads/master'
+        run: |
+          yarn global add --unsafe-perm=true netlify-cli
+          echo "$(yarn global bin)" >> $GITHUB_PATH
+
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+        if: github.ref == 'refs/heads/master'
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN -p --dir ./dist
