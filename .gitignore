@@ -3,3 +3,4 @@ pkg/
 node_modules/
 dist/
 src/generated/css_classes.rs
+css/compiled.scss
